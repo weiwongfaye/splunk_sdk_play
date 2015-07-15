@@ -9,7 +9,7 @@ Hosts = ['localhost',]
 PLATFORM = "WINDOWS"
 
 if PLATFORM == "WINDOWS":
-	SPLUNK_HOME = "/c/cygwin/cdrive/splunk/"
+	SPLUNK_HOME = "/cygdrive/c/splunk"
 	SPLUNK_EXEUTABLE = os.path.join(SPLUNK_HOME,'bin','splunk')
 else:
 	SPLUNK_HOME = '/export/usr/eserv/splunk'
@@ -18,8 +18,10 @@ else:
 
 for host in Hosts:
 
+	print '#'*100
+	print host
 	# https://localhost:8089/servicesNS/nobody/system/configs/conf-server/genera
-	config_server_uri = 'https://{0}:8089/servicesNS/nobody/system/configs/conf-server/genral'.format(host)
+	config_server_uri = 'https://{0}:8089/servicesNS/nobody/system/configs/conf-server/general'.format(host)
 	config_web_uri = 'https://{0}:8089/servicesNS/nobody/system/configs/conf-web/settings'.format(host)
 
 	payload_server ={"listenOnIPv6":"only"}
@@ -27,8 +29,9 @@ for host in Hosts:
 
 	# Use verify=False if your root CA can't be verified.
 	# Or you can specify verify = '../mycert.pem'
-	r = requests.post(config_server_uri,auth=('admin','notchangeme'),data=payload,verify =False)
-	r = requests.post(config_web_uri-url_web,auth=('admin','notchangeme'),data=payload,verify =False)    
+	r = requests.post(config_server_uri,auth=('admin','notchangeme'),data=payload_server,verify =False)
+	print r.text
+	r = requests.post(config_web_uri,auth=('admin','notchangeme'),data=payload_web,verify =False)    
 	print r.text
 
 
