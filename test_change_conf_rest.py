@@ -42,3 +42,6 @@ for host in Hosts:
 	stdin, stdout, stderr = ssh.exec_command("{0} restart -f".format(SPLUNK_EXEUTABLE))
 
 	print stdout.readlines()[0]
+
+	
+fe80::e1fc:fa33:201d:668d%12
